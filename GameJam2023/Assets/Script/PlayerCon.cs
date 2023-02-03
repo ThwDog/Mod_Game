@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCon : MonoBehaviour
 {
@@ -18,9 +19,19 @@ public class PlayerCon : MonoBehaviour
 
     public ItemCollect item;
 
+    [Header("Heath")]
+    public int maxHp = 6;
+    public int currentHp;   
+
+    public UIControll ui;
+
+    public Animation anim;
+    bool playerDead = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHp = maxHp;
     }
 
     // Update is called once per frame
@@ -28,6 +39,7 @@ public class PlayerCon : MonoBehaviour
     {
         movement();
         jump();
+        dead();
     }
 
     void movement()
@@ -59,7 +71,7 @@ public class PlayerCon : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Item")
+        if (collision.gameObject.name == "Wood")
         {
             Debug.Log("destroy");
             //Destroy(collision.gameObject);
@@ -73,5 +85,30 @@ public class PlayerCon : MonoBehaviour
         {
             floorCheck = true;
         }
+
+        if(collision.gameObject.tag == "Enemy" && floorCheck == true)
+        {
+            currentHp--;
+            ui.gethit++;
+        }
     }
+
+    void dead()
+    {
+        if (currentHp == 0)
+        {
+            playerDead = true;
+            StartCoroutine(slowDead());
+        }
+    }
+    
+    IEnumerator slowDead()
+    {
+        //anim.Play("");
+        yield return new WaitForSeconds(2);
+        playerDead = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
 }

@@ -20,7 +20,7 @@ public class ItemCollect : MonoBehaviour
 
     void playerpass()
     {
-        if (c1 == 10)
+        if (c1 == 5)
         {
             pass = true;
             //Debug.Log("Passs");

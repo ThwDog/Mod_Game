@@ -16,8 +16,8 @@ public class Camfoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this.transform.position  = player.position - offset;
-        jump();
+        this.transform.position  = player.position - offset;
+        //jump();
     }
 
     void jump()
