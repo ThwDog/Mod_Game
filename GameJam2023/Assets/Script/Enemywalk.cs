@@ -67,8 +67,6 @@ public class Enemywalk : MonoBehaviour
             {
                 speed = 0;
                 this.gameObject.GetComponent<Animator>().enabled = false;
-                this.gameObject.GetComponent<Collider2D>().enabled = false;
-                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 //this.gameObject.GetComponent<Rigidbody2D>().position = Vector3.zero;
             }
             //เล่นท่าตาย

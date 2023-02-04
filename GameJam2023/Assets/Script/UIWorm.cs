@@ -13,6 +13,10 @@ public class UIWorm : MonoBehaviour
     public WormBgInst bgInst;
     public Canvas canvas;
 
+    public Canvas end;
+    public bool win = false;
+    public Animator anim;
+
     [Header("TimeCount")]
     public float cTime;
 
@@ -45,7 +49,11 @@ public class UIWorm : MonoBehaviour
         }
         else if(cTime < 0 && player.score > 2500)
         {
-            Debug.Log("Winnnn");
+            win = true;
+            end.gameObject.SetActive(true);
+            anim.SetBool("win", true);
+
+            canvas.gameObject.SetActive(false);
             bgInst.speed = 0;
         }
     }

@@ -40,6 +40,7 @@ public class PlayerCon : MonoBehaviour
         movement();
         jump();
         dead();
+        exit();
     }
 
     void movement()
@@ -47,7 +48,7 @@ public class PlayerCon : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector2(horizontal * speed , rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed ,rb.velocity.y);
         if (Input.GetAxis("Horizontal") > 0)
         {
             anim.SetBool("walk", true);
@@ -70,7 +71,8 @@ public class PlayerCon : MonoBehaviour
 
     void jump()
     {
-        if (Input.GetKey(KeyCode.Space) && canJump == true)
+        
+        if (Input.GetKey(KeyCode.Space) && canJump == true || Input.GetKey(KeyCode.Joystick1Button1) && canJump == true)
         {
             rb.velocity = new Vector2(rb.velocity.x, vertical + jPower);         
             canJump = false;
@@ -163,4 +165,12 @@ public class PlayerCon : MonoBehaviour
 
     }
 
+    void exit()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("quit Game");
+            Application.Quit();
+        }
+    }
 }

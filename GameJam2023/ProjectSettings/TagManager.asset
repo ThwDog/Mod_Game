@@ -64,3 +64,9 @@ TagManager:
   - name: Trap
     uniqueID: 1185550035
     locked: 0
+  - name: Grass
+    uniqueID: 3222847013
+    locked: 0
+  - name: TreeBlock
+    uniqueID: 665157337
+    locked: 0
