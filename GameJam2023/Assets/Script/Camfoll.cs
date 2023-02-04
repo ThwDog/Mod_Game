@@ -5,30 +5,33 @@ using UnityEngine;
 public class Camfoll : MonoBehaviour
 {
     public Transform player;
-    public Vector3 offset;
+    //public Vector3 offset;
     public PlayerCon charecter;
+    public float camfollspeed;
 
     void Start()
     {
-        this.transform.position  = player.position + offset;
+        //this.transform.position  = player.position + offset;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position  = player.position - offset;
+        Vector3 follposition = new Vector3(player.position.x, player.position.y + 2f,-1f);
+        this.transform.position = Vector3.Lerp(this.transform.position,follposition,Time.deltaTime * camfollspeed);
+        //this.transform.position  = player.position - offset;
         //jump();
     }
 
-    void jump()
+    /*void jump()
     {
         if(charecter.floorCheck == false)
         {
-            this.transform.position = player.position - new Vector3(0,-2,1);
+            camfollspeed = 5;
         }
         else
         {
-            this.transform.position = player.position - offset;
+            camfollspeed = 1;
         }
-    }
+    }*/
 }

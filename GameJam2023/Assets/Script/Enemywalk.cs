@@ -14,7 +14,7 @@ public class Enemywalk : MonoBehaviour
     bool rightCheck = false;
 
     bool dead = false;
-    public Animation anim;
+    //public Animation anim;
 
     public PlayerCon player;
 
@@ -31,13 +31,13 @@ public class Enemywalk : MonoBehaviour
     {
         if (leftCheck == false)
         {
-            localscale.x = -1;
+            localscale.x = -1.66f;
             transform.localScale = localscale;
             rb.velocity = new Vector2(localscale.x *speed , rb.velocity.y);
         }
         else if(rightCheck == false)
         {
-            localscale.x = 1;
+            localscale.x = 1.66f;
             transform.localScale = localscale;
             rb.velocity = new Vector2(localscale.x * speed, rb.velocity.y);
         }
@@ -66,8 +66,10 @@ public class Enemywalk : MonoBehaviour
             if(dead == true)
             {
                 speed = 0;
+                this.gameObject.GetComponent<Animator>().enabled = false;
                 this.gameObject.GetComponent<Collider2D>().enabled = false;
                 this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                //this.gameObject.GetComponent<Rigidbody2D>().position = Vector3.zero;
             }
             //เล่นท่าตาย
 
@@ -79,7 +81,7 @@ public class Enemywalk : MonoBehaviour
     IEnumerator playEnemyDead()
     {
         yield return new WaitForSeconds(2);
-        //Destroy(gameObject);
+        Destroy(gameObject);
         Debug.Log("Kudead");
         dead = false;
     }

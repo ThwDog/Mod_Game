@@ -26,11 +26,11 @@ public class UIControll : MonoBehaviour
     void Update()
     {
         canvas.gameObject.SetActive(true);
-        hp();
+        hp(gethit);
         itemUI();
     }
 
-    void hp()
+    public void hp(int gethit)
     {
 
         heartPic[gethit].SetActive(false);
@@ -39,5 +39,7 @@ public class UIControll : MonoBehaviour
     void itemUI()
     {
         item1.text = item.c1.ToString() + "/" + "5";
+        item2.text = item.c2.ToString() + "/" + "5";
+        item3.text = item.c3.ToString() + "/" + "5";
     }
 }

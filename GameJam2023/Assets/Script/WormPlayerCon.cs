@@ -11,6 +11,10 @@ public class WormPlayerCon : MonoBehaviour
     [Header("MoveMent")]
     public int speed;
 
+    [Header("Point")]
+    public int score;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

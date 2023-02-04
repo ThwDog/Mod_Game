@@ -25,7 +25,7 @@ public class PlayerCon : MonoBehaviour
 
     public UIControll ui;
 
-    public Animation anim;
+    public Animator anim;
     bool playerDead = false;
 
     void Start()
@@ -48,8 +48,24 @@ public class PlayerCon : MonoBehaviour
         vertical = Input.GetAxis("Vertical");
 
         rb.velocity = new Vector2(horizontal * speed , rb.velocity.y);
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            anim.SetBool("walk", true);
+            //Debug.Log("r");
+            transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        }
+        //walk left
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            anim.SetBool("walk", true);
+            //Debug.Log("l");
+            transform.localScale = new Vector3(-0.3f, 0.3f, 0.3f);
+        }
+        if (horizontal == 0)
+        {
+            anim.SetBool("walk", false);
+        }
 
-        
     }
 
     void jump()
@@ -72,10 +88,19 @@ public class PlayerCon : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "Wood")
-        {
-            Debug.Log("destroy");
-            //Destroy(collision.gameObject);
+        {            
+            Destroy(collision.gameObject);
             item.c1++;
+        }
+        if (collision.gameObject.name == "Leaf")
+        {
+            Destroy(collision.gameObject);
+            item.c2++;
+        }
+        if (collision.gameObject.name == "Clover")
+        {
+            Destroy(collision.gameObject); 
+            item.c3++;
         }
     }
 
@@ -91,15 +116,42 @@ public class PlayerCon : MonoBehaviour
             currentHp--;
             ui.gethit++;
         }
+
+        if (collision.gameObject.tag == "Trap")
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                ui.hp(i);
+                currentHp = 0;
+            }
+              //ui.gethit++;
+            
+            //currentHp = 0;
+   
+        }
     }
 
     void dead()
     {
+        if (this.gameObject.transform.position.y < -6f)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                ui.hp(i);
+                currentHp = 0;
+            }
+        }
+
         if (currentHp == 0)
         {
             playerDead = true;
             StartCoroutine(slowDead());
+            this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.GetComponent<Collider2D>().enabled = false;
+            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
+
+        
     }
     
     IEnumerator slowDead()

@@ -22,7 +22,7 @@ public class Spawn_Worm : MonoBehaviour
 
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class Spawn_Worm : MonoBehaviour
 
     void spawner()
     {
-        Vector2 pos = new Vector2(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
+        Vector2 pos = new Vector2(Random.Range(xMin, xMax), transform.position.y);
 
         GameObject itemPrefab = instobj[Random.Range(0, instobj.Length)];
 

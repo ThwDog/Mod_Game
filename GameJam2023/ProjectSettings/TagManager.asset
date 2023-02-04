@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Floor
   - Enemy
+  - Rock
+  - Trap
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -57,4 +60,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3618360053
+    locked: 0
+  - name: Trap
+    uniqueID: 1185550035
     locked: 0
