@@ -26,10 +26,11 @@ public class PlayerCon : MonoBehaviour
     public UIControll ui;
 
     public Animator anim;
-    bool playerDead = false;
+    public bool playerDead = false;
 
     void Start()
     {
+        PauseMenu.thisgameisPause = false;
         rb = GetComponent<Rigidbody2D>();
         currentHp = maxHp;
     }
@@ -40,10 +41,9 @@ public class PlayerCon : MonoBehaviour
         movement();
         jump();
         dead();
-        exit();
     }
 
-    void movement()
+    public void movement()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -165,12 +165,5 @@ public class PlayerCon : MonoBehaviour
 
     }
 
-    void exit()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Debug.Log("quit Game");
-            Application.Quit();
-        }
-    }
+    
 }

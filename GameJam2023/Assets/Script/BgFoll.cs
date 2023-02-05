@@ -9,6 +9,6 @@ public class BgFoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.transform.position = new Vector3(player.position.x,this.gameObject.transform.position.y,-5f);
+        this.gameObject.transform.position = new Vector3(player.position.x, Mathf.Clamp(transform.position.y, 0, 1.3f), -5f);
     }
 }

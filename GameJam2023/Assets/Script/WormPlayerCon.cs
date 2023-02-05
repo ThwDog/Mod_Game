@@ -24,10 +24,9 @@ public class WormPlayerCon : MonoBehaviour
     void Update()
     {
         dig();
-        exit();
     }
 
-    void dig()
+    public void dig()
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -35,12 +34,5 @@ public class WormPlayerCon : MonoBehaviour
         rb.velocity = new Vector2(horizontal * speed , vertical * speed);
     }
 
-    void exit()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Debug.Log("quit Game");
-            Application.Quit();
-        }
-    }
+   
 }

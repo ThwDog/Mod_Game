@@ -25,14 +25,25 @@ public class SceneChange : MonoBehaviour
     {
         canvas.gameObject.SetActive(false);
 
-        transition.SetTrigger("Start");
+        transition.SetBool("ON", false );
 
         yield return new WaitForSeconds(tranTime); 
 
         SceneManager.LoadScene(lvlIdex);
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Worm"))
+        {
+            GameObject.FindWithTag("Player").GetComponent<WormPlayerCon>().enabled = true;
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Mod"))
+        {
+            GameObject.FindWithTag("Player").GetComponent<PlayerCon>().enabled = true;
+        }
         canvas.gameObject.SetActive(true);
-
-
-        //transition.SetTrigger("End");
+        yield return new WaitForSeconds(tranTime);
+        transition.SetBool("ON", true );
+        PauseMenu.thisgameisPause = false;
+        
     }
+
+
 }
