@@ -32,7 +32,7 @@ public class UIControll : MonoBehaviour
 
     public void hp(int gethit)
     {
-
+        //gethit = gethit - 1;
         heartPic[gethit].SetActive(false);
     }
 
